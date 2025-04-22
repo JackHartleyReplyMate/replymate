@@ -1,3 +1,5 @@
+export const runtime = 'nodejs';
+
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
 
@@ -9,12 +11,10 @@ const openai = new OpenAIApi(config);
 export async function POST(req) {
   const { reviewText, tone = "friendly", businessName = "Your Business" } = await req.json();
 
-  const prompt = \`
-You are a customer‑care assistant for \${businessName}, responding to UK reviews in British English.
+  const prompt = \`You are a customer-care assistant for \${businessName}, responding to UK reviews in British English.
 Reply in a \${tone} tone:
 
-"\${reviewText}"
-\`;
+"\${reviewText}"\`;
 
   try {
     const completion = await openai.createCompletion({
